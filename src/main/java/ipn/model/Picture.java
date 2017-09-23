@@ -1,7 +1,6 @@
 package ipn.model;
 
 import java.util.HashMap;
-import javafx.scene.image.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
