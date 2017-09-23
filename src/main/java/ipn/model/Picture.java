@@ -24,7 +24,6 @@ public class Picture {
   private HashMap<Integer, Double> deviationGradChart = new HashMap<>();
 
   private Mat imageMat;
-  private Image image;
   private String name;
 
   private double mathWaitOpening;

@@ -38,7 +38,6 @@ public class OperationsService {
 
       picture.setName(image.getName());
       picture.setImageMat(fileOperations.getPicture());
-      picture.setImage(fileOperations.convertImage(picture.getImageMat()));
 
       pictures.add(picture);
       progress++;
