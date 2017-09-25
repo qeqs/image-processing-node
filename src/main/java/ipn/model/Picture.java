@@ -1,5 +1,6 @@
 package ipn.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.HashMap;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +23,7 @@ public class Picture {
   private HashMap<Integer, Double> matWaitGradChart = new HashMap<>();
   private HashMap<Integer, Double> deviationGradChart = new HashMap<>();
 
+  @JsonIgnore
   private Mat imageMat;
   private String name;
 
