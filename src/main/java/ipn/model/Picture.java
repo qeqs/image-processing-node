@@ -23,7 +23,6 @@ public class Picture {
   private HashMap<Integer, Double> matWaitGradChart = new HashMap<>();
   private HashMap<Integer, Double> deviationGradChart = new HashMap<>();
 
-  @JsonIgnore
   private Mat imageMat;
   private String name;
 

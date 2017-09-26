@@ -20,8 +20,6 @@ public class OperationsController {
     return "image-processing-node";
   }
 
-  @RequestMapping(value = "/payload")
-  @GetMapping
   public Picture picturePayload() {
     return Picture.builder()
         .deviationGrad(2.0)
