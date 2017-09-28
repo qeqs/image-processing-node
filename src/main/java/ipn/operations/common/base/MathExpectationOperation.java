@@ -3,14 +3,14 @@ package ipn.operations.common.base;
 import java.util.HashMap;
 import lombok.Getter;
 import lombok.Setter;
-import net.bytebuddy.implementation.bind.annotation.Default;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
 /**
  * Created by Vadim Lygin on 9/26/2017.
  */
-public abstract class MathExpectationOperation implements Operation<HashMap<Integer, Double>>{
+public abstract class MathExpectationOperation implements Operation<HashMap<Integer, Double>> {
+
   private final Operation morphOperation;
   @Setter
   @Getter

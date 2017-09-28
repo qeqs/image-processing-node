@@ -1,5 +1,6 @@
 package ipn.operations.common.base;
 
+import ipn.operations.OperationsUtil;
 import java.util.HashMap;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,20 +12,25 @@ import org.opencv.core.Mat;
  */
 public abstract class DeviationOperation implements Operation<HashMap<Integer, Double>> {
 
-  private final Operation morphOperation;
+  private final Operation<Mat> morphOperation;
+  private final Operation<HashMap<Integer, Double>> mathWaitOperation;
   @Setter
   @Getter
   private int steps;
 
-
-  protected DeviationOperation(Operation morphOperation, Operation mathWaitOperation, int steps) {
+  protected DeviationOperation(Operation<Mat> morphOperation,
+      Operation<HashMap<Integer, Double>> mathWaitOperation, int steps) {
     this.morphOperation = morphOperation;
+    this.mathWaitOperation = mathWaitOperation;
     this.steps = steps;
   }
 
   @Override
   public HashMap<Integer, Double> execute(Mat image, Mat prim) {
 
+    HashMap<Integer, Double> chart = mathWaitOperation.execute(image, prim);
+    double mat = OperationsUtil.scalar(chart);
+    chart = new HashMap<>();
 
     Mat res = new Mat();
     Mat tempPrev = new Mat();
@@ -41,6 +47,6 @@ public abstract class DeviationOperation implements Operation<HashMap<Integer, D
 
       tempNext.copyTo(tempPrev);
     }
-    return chart
+    return chart;
   }
 }

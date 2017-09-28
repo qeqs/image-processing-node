@@ -1,0 +1,7 @@
+server:
+  port: 8080
+  contextPath: /
+  endpoint: http://image-processing-node:${server.port}${server.contextPath}
+
+application:
+  steps: 40

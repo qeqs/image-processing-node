@@ -3,12 +3,14 @@ package ipn.operations.common.morph;
 import ipn.operations.common.base.Operation;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 /**
  * Created by Vadim Lygin on 9/26/2017.
  */
-@Component("prototype")
+@Component
+@Scope("prototype")
 public class OpeninigOperation implements Operation<Mat> {
 
   @Override
