@@ -1,10 +1,8 @@
-package ipn.operations.common.statistic;
+package ipn.operations.statistics;
 
-import ipn.operations.common.base.MathExpectationOperation;
-import ipn.operations.common.base.Operation;
+import ipn.operations.base.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +15,7 @@ public class OpeningMathExpectationOperation extends MathExpectationOperation {
 
   @Autowired
   public OpeningMathExpectationOperation(
-      @Qualifier("openinigOperation") Operation morphOperation,
-      @Value("application.steps") int steps) {
-    super(morphOperation, steps);
+      @Qualifier("openinigOperation") Operation morphOperation) {
+    super(morphOperation);
   }
 }

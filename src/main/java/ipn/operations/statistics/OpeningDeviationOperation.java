@@ -1,12 +1,10 @@
-package ipn.operations.common.statistic;
+package ipn.operations.statistics;
 
-import ipn.operations.common.base.DeviationOperation;
-import ipn.operations.common.base.Operation;
+import ipn.operations.base.Operation;
 import java.util.HashMap;
 import org.opencv.core.Mat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
@@ -20,8 +18,7 @@ public class OpeningDeviationOperation extends DeviationOperation {
   @Autowired
   public OpeningDeviationOperation(
       @Qualifier("openinigOperation") Operation<Mat> morphOperation,
-      @Qualifier("openingMathExpectationOperation") Operation<HashMap<Integer, Double>> mathWaitOperation,
-      @Value("application.steps") int steps) {
-    super(morphOperation, mathWaitOperation, steps);
+      @Qualifier("openingMathExpectationOperation") Operation<HashMap<Integer, Double>> mathWaitOperation) {
+    super(morphOperation, mathWaitOperation);
   }
 }

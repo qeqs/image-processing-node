@@ -1,9 +1,9 @@
-package ipn.operations.common.base;
+package ipn.operations.statistics;
 
 import ipn.operations.OperationsUtil;
+import ipn.operations.base.Operation;
 import java.util.HashMap;
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Map;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 
@@ -14,21 +14,19 @@ public abstract class DeviationOperation implements Operation<HashMap<Integer, D
 
   private final Operation<Mat> morphOperation;
   private final Operation<HashMap<Integer, Double>> mathWaitOperation;
-  @Setter
-  @Getter
-  private int steps;
 
   protected DeviationOperation(Operation<Mat> morphOperation,
-      Operation<HashMap<Integer, Double>> mathWaitOperation, int steps) {
+      Operation<HashMap<Integer, Double>> mathWaitOperation) {
     this.morphOperation = morphOperation;
     this.mathWaitOperation = mathWaitOperation;
-    this.steps = steps;
   }
 
   @Override
-  public HashMap<Integer, Double> execute(Mat image, Mat prim) {
+  public HashMap<Integer, Double> execute(Mat image, Map<String, Object> metadata) {
 
-    HashMap<Integer, Double> chart = mathWaitOperation.execute(image, prim);
+    int steps = (int) metadata.get("steps");
+
+    HashMap<Integer, Double> chart = mathWaitOperation.execute(image, metadata);
     double mat = OperationsUtil.scalar(chart);
     chart = new HashMap<>();
 
@@ -37,7 +35,7 @@ public abstract class DeviationOperation implements Operation<HashMap<Integer, D
     image.copyTo(tempPrev);
     Mat tempNext;
     for (int i = 1; i < 2 * steps; i += 2) {
-      tempNext = (Mat) morphOperation.execute(tempPrev, prim);
+      tempNext = (Mat) morphOperation.execute(tempPrev, metadata);
 
       Core.subtract(tempPrev, tempNext, res);
 

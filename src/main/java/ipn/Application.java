@@ -1,8 +1,6 @@
 package ipn;
 
 
-import ipn.operations.common.morph.OpeninigOperation;
-import ipn.operations.common.statistic.OpeningDeviationOperation;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

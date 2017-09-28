@@ -8,15 +8,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.eclipse.jetty.util.MultiPartWriter;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 /**
  * Created by Vadim Lygin on 9/25/2017.
@@ -32,11 +29,9 @@ public abstract class FeatureMapper {
   public File toCsv(Picture picture) {
     String filename = picture.getName() + ".csv";
     try (Writer writer = new FileWriter(filename)) {
-      List<HashMap<String, Double>> listOfMap = new ArrayList<>();
-      listOfMap.add(DataMapper.MAPPER.toStringKey(picture.getMatWaitOpeningChart()));
-      listOfMap.add(DataMapper.MAPPER.toStringKey(picture.getMatWaitGradChart()));
-      listOfMap.add(DataMapper.MAPPER.toStringKey(picture.getDeviationOpeningChart()));
-      listOfMap.add(DataMapper.MAPPER.toStringKey(picture.getDeviationGradChart()));
+      List<HashMap<String, Double>> listOfMap = picture.getData().entrySet().stream()
+          .map(e -> DataMapper.MAPPER.toStringKey(e.getValue())).collect(
+              Collectors.toList());
 
       csvWriter(listOfMap, writer);
       return new File(filename);
