@@ -1,4 +1,4 @@
-package ipn.operations.executors;
+package ipn.executors;
 
 import ipn.model.Picture;
 import ipn.operations.base.Operation;

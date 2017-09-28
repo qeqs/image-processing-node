@@ -2,7 +2,7 @@ package ipn.services;
 
 import ipn.model.Feature;
 import ipn.model.Picture;
-import ipn.operations.executors.Executor;
+import ipn.executors.Executor;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;

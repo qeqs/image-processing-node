@@ -1,4 +1,4 @@
-package ipn.operations.executors;
+package ipn.executors;
 
 import ipn.operations.base.Operation;
 import java.util.HashMap;

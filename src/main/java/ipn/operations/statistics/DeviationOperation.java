@@ -35,7 +35,7 @@ public abstract class DeviationOperation implements Operation<HashMap<Integer, D
     image.copyTo(tempPrev);
     Mat tempNext;
     for (int i = 1; i < 2 * steps; i += 2) {
-      tempNext = (Mat) morphOperation.execute(tempPrev, metadata);
+      tempNext = morphOperation.execute(tempPrev, metadata);
 
       Core.subtract(tempPrev, tempNext, res);
 
