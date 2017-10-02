@@ -11,4 +11,5 @@ public class Application {
     nu.pattern.OpenCV.loadShared();
     SpringApplication.run(Application.class, args);
   }
+
 }

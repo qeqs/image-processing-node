@@ -8,52 +8,29 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.opencv.core.Mat;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Data
+@ToString(of = {"name"})
 public class Picture {
-
-  private HashMap<Integer, Double> matWaitOpeningChart = new HashMap<>();
-  private HashMap<Integer, Double> deviationOpeningChart = new HashMap<>();
-  private HashMap<Integer, Double> matWaitGradChart = new HashMap<>();
-  private HashMap<Integer, Double> deviationGradChart = new HashMap<>();
+  private HashMap<String, HashMap<Integer, Double>> data;
+  private HashMap<String, Double> scalar;
+  private HashMap<String, Object> metadata;
 
   @JsonIgnore
   private Mat imageMat;
   private String name;
+  private OperationType operationType;
 
-  private double mathWaitOpening;
-  private double deviationOpening;
-  private double mathWaitGrad;
-  private double deviationGrad;
-
-  @Override
-  public String toString() {
-    return name;
+  {
+    data = new HashMap<>();
+    scalar = new HashMap<>();
+    metadata = new HashMap<>();
   }
 
-  public Picture setMatWaitOpeningChart(HashMap<Integer, Double> matWaitOpeningChart) {
-    this.matWaitOpeningChart = (HashMap<Integer, Double>) matWaitOpeningChart.clone();
-    return Picture.this;
-  }
-
-  public Picture setDeviationOpeningChart(HashMap<Integer, Double> deviationOpeningChart) {
-    this.deviationOpeningChart = (HashMap<Integer, Double>) deviationOpeningChart.clone();
-    return Picture.this;
-  }
-
-  public Picture setMatWaitGradChart(HashMap<Integer, Double> matWaitGradChart) {
-    this.matWaitGradChart = (HashMap<Integer, Double>) matWaitGradChart.clone();
-    return Picture.this;
-  }
-
-  public Picture setDeviationGradChart(HashMap<Integer, Double> deviationGradChart) {
-    this.deviationGradChart = (HashMap<Integer, Double>) deviationGradChart.clone();
-    return Picture.this;
-  }
 }

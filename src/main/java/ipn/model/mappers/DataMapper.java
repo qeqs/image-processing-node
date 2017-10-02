@@ -34,4 +34,7 @@ public abstract class DataMapper {
     data.add(deviationOpening);
     return data;
   }
+
+  public abstract HashMap<String, Double> toStringKey(HashMap<Integer, Double> map);
+
 }
