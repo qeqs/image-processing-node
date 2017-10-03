@@ -10,7 +10,7 @@ import org.opencv.core.Mat;
 /**
  * Created by Vadim Lygin on 9/26/2017.
  */
-public abstract class DeviationOperation implements Operation<HashMap<Integer, Double>> {
+public abstract class DeviationOperation implements StatisticOperation {
 
   private final Operation<Mat> morphOperation;
   private final Operation<HashMap<Integer, Double>> mathWaitOperation;

@@ -21,4 +21,9 @@ public class OpeningDeviationOperation extends DeviationOperation {
       @Qualifier("openingMathExpectationOperation") Operation<HashMap<Integer, Double>> mathWaitOperation) {
     super(morphOperation, mathWaitOperation);
   }
+
+  @Override
+  public String toString() {
+    return "OpeningDeviation";
+  }
 }

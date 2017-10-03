@@ -1,6 +1,8 @@
 package ipn.executors;
 
+import ipn.model.OperationType;
 import ipn.operations.base.Operation;
+import ipn.operations.statistics.StatisticOperation;
 import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +17,12 @@ import org.springframework.stereotype.Component;
 public class StatisticOperationsExecutor extends OperationExecutor {
 
   @Autowired
-  public StatisticOperationsExecutor(List<? extends Operation<HashMap<Integer, Double>>> operations) {
+  public StatisticOperationsExecutor(List<? extends StatisticOperation> operations) {
     super((List<Operation>) operations);
+  }
+
+  @Override
+  public boolean isApplicableFor(OperationType type) {
+    return type.equals(OperationType.STATISTICAL);
   }
 }

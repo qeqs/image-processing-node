@@ -1,5 +1,6 @@
 package ipn.services;
 
+import ipn.model.Picture;
 import ipn.model.repositories.PictureRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,5 +13,13 @@ public class PictureService {
 
   @Autowired
   PictureRepository repository;
+
+  public Picture getPicture(String id){
+    return repository.findOne(id);
+  }
+
+  public Picture save(Picture picture){
+    return repository.save(picture);
+  }
 
 }

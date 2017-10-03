@@ -2,7 +2,7 @@ package ipn.executors;
 
 import ipn.model.Picture;
 import ipn.operations.base.Operation;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -19,11 +19,11 @@ public abstract class OperationExecutor implements Executor {
 
 
   public void process(Picture picture) {
-    ArrayList<Object> featureList = new ArrayList<>();
+    HashMap<String, Object> featureList = new HashMap<>();
     for (Operation operation : operations) {
-      featureList.add(operation.execute(picture.getImageMat(), picture.getMetadata()));
+      featureList.put(operation.toString(), operation.execute(picture.getImageMat(), picture.getMetadata()));
     }
-
+    picture.setData(featureList);
   }
 
 }

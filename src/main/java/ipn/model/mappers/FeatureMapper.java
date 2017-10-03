@@ -30,7 +30,7 @@ public abstract class FeatureMapper {
     String filename = picture.getName() + ".csv";
     try (Writer writer = new FileWriter(filename)) {
       List<HashMap<String, Double>> listOfMap = picture.getData().entrySet().stream()
-          .map(e -> DataMapper.MAPPER.toStringKey(e.getValue())).collect(
+          .map(e -> DataMapper.MAPPER.toStringKey((HashMap<Integer, Double>) e.getValue())).collect(
               Collectors.toList());
 
       csvWriter(listOfMap, writer);

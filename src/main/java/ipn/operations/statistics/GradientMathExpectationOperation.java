@@ -18,4 +18,9 @@ public class GradientMathExpectationOperation extends MathExpectationOperation {
       @Qualifier("gradientOperation") Operation morphOperation) {
     super(morphOperation);
   }
+
+  @Override
+  public String toString() {
+    return "GradientMathExpectation";
+  }
 }

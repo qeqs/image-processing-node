@@ -1,8 +1,7 @@
 package ipn.services;
 
-import ipn.model.Feature;
-import ipn.model.Picture;
 import ipn.executors.Executor;
+import ipn.model.Picture;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 @Service
 public class FeatureBuilder {
 
-
   private final List<Executor> executors;
 
   @Autowired
@@ -22,13 +20,13 @@ public class FeatureBuilder {
     this.executors = executors;
   }
 
-  public Feature buildFeature(Picture picture){
+  public Picture buildFeature(Picture picture) {
 
     executors.stream()
         .filter(executor -> executor.isApplicableFor(picture.getOperationType()))
         .collect(Collectors.toList())
         .forEach(executor -> executor.process(picture));
-    return null;
+    return picture;
   }
 
 }

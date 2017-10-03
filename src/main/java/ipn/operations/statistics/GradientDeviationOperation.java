@@ -21,4 +21,9 @@ public class GradientDeviationOperation extends DeviationOperation{
       @Qualifier("gradientMathExpectationOperation") Operation<HashMap<Integer, Double>> mathWaitOperation) {
     super(morphOperation, mathWaitOperation);
   }
+
+  @Override
+  public String toString() {
+    return "GradientDeviation";
+  }
 }
