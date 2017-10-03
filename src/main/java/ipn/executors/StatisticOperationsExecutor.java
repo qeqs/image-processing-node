@@ -18,7 +18,7 @@ public class StatisticOperationsExecutor extends OperationExecutor {
 
   @Autowired
   public StatisticOperationsExecutor(List<? extends StatisticOperation> operations) {
-    super((List<Operation>) operations);
+    super(operations);
   }
 
   @Override

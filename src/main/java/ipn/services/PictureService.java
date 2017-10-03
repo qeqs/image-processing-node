@@ -11,8 +11,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class PictureService {
 
+  private final PictureRepository repository;
+
   @Autowired
-  PictureRepository repository;
+  public PictureService(PictureRepository repository) {
+    this.repository = repository;
+  }
 
   public Picture getPicture(String id){
     return repository.findOne(id);

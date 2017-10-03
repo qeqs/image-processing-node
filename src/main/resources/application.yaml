@@ -5,3 +5,27 @@ server:
 
 application:
   steps: 40
+
+spring:
+  application:
+    name: "image-processing-node"
+  datasource:
+    url: jdbc:postgresql://${PG_URL}
+    username: ${PG_USER}
+    password: ${PG_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        show-sql: false
+        format-sql: true
+        use_sql_comments: true
+        generate_statistics: false
+        jdbc:
+          time_zone: "Europe/Moscow"
+      org:
+        hibernate:
+          envers:
+            track_entities_changed_in_revision: true

@@ -11,9 +11,9 @@ import java.util.List;
 public abstract class OperationExecutor implements Executor {
 
 
-  protected final List<Operation> operations;
+  protected final List<? extends Operation> operations;
 
-  protected OperationExecutor(List<Operation> operations) {
+  protected OperationExecutor(List<? extends Operation> operations) {
     this.operations = operations;
   }
 

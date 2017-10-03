@@ -14,7 +14,6 @@ import org.opencv.core.Mat;
 @Getter
 @Setter
 @NoArgsConstructor
-@Builder
 @Data
 @ToString(of = {"name"})
 public class Picture {
