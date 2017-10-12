@@ -2,6 +2,8 @@ package ipn.services;
 
 import ipn.model.Picture;
 import ipn.model.repositories.PictureRepository;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,4 +28,7 @@ public class PictureService {
     return repository.save(picture);
   }
 
+  public List<Picture> getAllPictures() {
+    return (List<Picture>) repository.findAll();
+  }
 }

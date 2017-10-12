@@ -1,7 +1,7 @@
 package ipn.services;
 
 import ipn.model.Picture;
-import ipn.model.transport.PictureInfo;
+import ipn.model.transport.ProcessInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,14 +25,13 @@ public class PictureHandler {
   }
 
 
-  public Picture handle(MultipartFile file, PictureInfo info){
+  public Picture handle(MultipartFile file){
     Picture picture = preprocessingService.preprocess(file);
-    picture.setMetadata(info.getMetadata());
-    picture.setName(info.getName());
-    picture.setOperationType(info.getType());
-    featureBuilder.buildFeature(picture);
-    //send csv to decitionNode
     return service.save(picture);
+  }
+
+  public Picture handleProcess(ProcessInfo processInfo, String pictureId){
+    return null;
   }
 
 }

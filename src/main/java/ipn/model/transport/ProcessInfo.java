@@ -14,10 +14,10 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class PictureInfo {
+public class ProcessInfo {
 
   private OperationType type;
-  private String name;
+  private String id;
   private HashMap<String, Object> metadata;
 
 }
