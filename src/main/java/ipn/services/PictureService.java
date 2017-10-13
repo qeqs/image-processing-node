@@ -1,9 +1,11 @@
 package ipn.services;
 
 import ipn.model.Picture;
+import ipn.model.PictureEntity;
+import ipn.model.mappers.EntityMapper;
 import ipn.model.repositories.PictureRepository;
-import java.util.ArrayList;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
  * Created by Vadim Lygin on 10/2/2017.
  */
 @Service
+@Transactional
 public class PictureService {
 
   private final PictureRepository repository;
@@ -20,15 +23,15 @@ public class PictureService {
     this.repository = repository;
   }
 
-  public Picture getPicture(String id){
-    return repository.findOne(id);
+  public Picture getPicture(String id) {
+    return EntityMapper.MAPPER.toTransport(repository.findOne(id));
   }
 
-  public Picture save(Picture picture){
-    return repository.save(picture);
+  public Picture save(Picture picture) {
+    return EntityMapper.MAPPER.toTransport(repository.save(EntityMapper.MAPPER.toEntity(picture)));
   }
 
   public List<Picture> getAllPictures() {
-    return (List<Picture>) repository.findAll();
+    return EntityMapper.MAPPER.toTransport((List<PictureEntity>) repository.findAll());
   }
 }

@@ -1,5 +1,6 @@
 package ipn.rest.controllers;
 
+import io.swagger.annotations.Api;
 import ipn.model.Picture;
 import ipn.model.transport.ProcessInfo;
 import ipn.services.PictureHandler;
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * Created by Vadim Lygin on 10/2/2017.
  */
+@Api
 @RequestMapping("/api/v1/pictures")
 @RestController
 public class PictureController {

@@ -3,6 +3,12 @@ server:
   contextPath: /
   endpoint: http://image-processing-node:${server.port}${server.contextPath}
 
+logging:
+  level:
+    org.springframework.web: ERROR
+    org.hibernate: ERROR
+
+
 application:
   steps: 40
 
@@ -10,9 +16,9 @@ spring:
   application:
     name: "image-processing-node"
   datasource:
-    url: jdbc:postgresql://${PG_URL}
-    username: ${PG_USER}
-    password: ${PG_PASSWORD}
+    url: jdbc:postgresql://localhost:5432/image_processing_node
+    username: postgres
+    password: postgres
   jpa:
     hibernate:
       ddl-auto: update
