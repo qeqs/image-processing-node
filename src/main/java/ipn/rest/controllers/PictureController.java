@@ -5,10 +5,12 @@ import ipn.model.Picture;
 import ipn.model.transport.ProcessInfo;
 import ipn.services.PictureHandler;
 import ipn.services.PictureService;
+import ipn.utils.FileUtils;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +37,6 @@ public class PictureController {
     this.handler = handler;
   }
 
-
   @GetMapping("/{id}")
   public ResponseEntity<Picture> getPicture(@PathVariable String id) {
     return new ResponseEntity<>(pictureService.getPicture(id), HttpStatus.OK);
@@ -46,13 +47,27 @@ public class PictureController {
     return new ResponseEntity<>(pictureService.getAllPictures(), HttpStatus.OK);
   }
 
+  @GetMapping("/{id}/download")
+  public ResponseEntity<byte[]> downloadPicture(@PathVariable String id){
+    Picture picture = pictureService.getPicture(id);
+    return new ResponseEntity<>(FileUtils.readBytes(picture.getName()), HttpStatus.OK);
+  }
 
   @PostMapping
-  public ResponseEntity loadPictures(@RequestParam("files") List<MultipartFile> image,
-      @RequestBody List<ProcessInfo> info) {
-
+  public ResponseEntity loadPictures(@RequestParam("files") List<MultipartFile> image) {
     image.forEach(img -> handler.handle(img));
+    return ResponseEntity.accepted().build();
+  }
 
+  @DeleteMapping("/{id}")
+  public ResponseEntity remove(@PathVariable String id){
+    pictureService.remove(id);
+    return ResponseEntity.accepted().build();
+  }
+
+  @DeleteMapping
+  public ResponseEntity removeAll(){
+    pictureService.removeAll();
     return ResponseEntity.accepted().build();
   }
 

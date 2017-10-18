@@ -135,5 +135,6 @@
     <orderEntry type="library" name="Maven: net.bytebuddy:byte-buddy:1.6.6" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-envers:5.2.9.Final" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate:hibernate-jpamodelgen:5.2.9.Final" level="project" />
+    <orderEntry type="library" name="Maven: commons-io:commons-io:2.2" level="project" />
   </component>
 </module>

@@ -4,6 +4,7 @@ import ipn.model.Picture;
 import ipn.model.PictureEntity;
 import java.util.List;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -14,6 +15,7 @@ public interface EntityMapper {
 
   static EntityMapper MAPPER = Mappers.getMapper(EntityMapper.class);
 
+  @Mapping(target = "imageMat", expression = "java(pictureEntity.getName()!=null? FileUtils.readFile(name):null)")
   Picture toTransport(PictureEntity pictureEntity);
 
   PictureEntity toEntity(Picture picture);

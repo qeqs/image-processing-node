@@ -2,6 +2,7 @@ package ipn.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ipn.model.OperationType;
+import ipn.utils.FileUtils;
 import java.util.HashMap;
 import lombok.Builder;
 import lombok.Data;
@@ -32,6 +33,7 @@ public class Picture {
     data = new HashMap<>();
     scalar = new HashMap<>();
     metadata = new HashMap<>();
+    imageMat=name!=null? FileUtils.readFile(name):null;
   }
 
 }

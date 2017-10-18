@@ -1,6 +1,7 @@
 package ipn.services;
 
 import ipn.model.Picture;
+import ipn.utils.FileUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,18 +27,14 @@ public class PreprocessingService {
     } catch (IOException e) {
       log.error("Error with saving picture ", e);
     }
-    Mat pic = null;
-    try {
-      pic = Imgcodecs.imread(file.getAbsolutePath());
-      if (pic.channels() > 3) {
-        Imgproc.cvtColor(pic, pic, Imgproc.COLOR_BGRA2BGR);
-      }
-    } catch (Exception e) {
-      log.error("Error with converting picture to bgr format ", e);
-    }
+    Mat pic = FileUtils.readFile(file.getAbsolutePath());
     Picture pictureTO = new Picture();
     pictureTO.setName(picture.getName());
     pictureTO.setImageMat(pic);
     return pictureTO;
   }
+
+
+
+
 }
