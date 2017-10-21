@@ -1,8 +1,7 @@
 package ipn.rest.controllers;
 
 import io.swagger.annotations.Api;
-import ipn.model.Picture;
-import ipn.model.transport.ProcessInfo;
+import ipn.model.transport.Picture;
 import ipn.services.PictureHandler;
 import ipn.services.PictureService;
 import ipn.utils.FileUtils;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,6 +57,13 @@ public class PictureController {
     image.forEach(img -> handler.handle(img));
     return ResponseEntity.accepted().build();
   }
+
+  @PutMapping
+  public ResponseEntity<Picture> loadPicture(@RequestParam("file") MultipartFile image) {
+    Picture picture = handler.handle(image);
+    return new ResponseEntity<Picture>(picture, HttpStatus.ACCEPTED);
+  }
+
 
   @DeleteMapping("/{id}")
   public ResponseEntity remove(@PathVariable String id){

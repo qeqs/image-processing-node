@@ -1,6 +1,6 @@
 package ipn.services;
 
-import ipn.model.Picture;
+import ipn.model.transport.Picture;
 import ipn.model.PictureEntity;
 import ipn.model.mappers.EntityMapper;
 import ipn.model.repositories.PictureRepository;

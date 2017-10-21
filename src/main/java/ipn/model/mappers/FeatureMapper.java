@@ -3,7 +3,7 @@ package ipn.model.mappers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import ipn.model.Picture;
+import ipn.model.transport.Picture;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -1,10 +1,8 @@
-package ipn.model;
+package ipn.model.transport;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import ipn.model.OperationType;
 import ipn.utils.FileUtils;
 import java.util.HashMap;
-import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,18 +20,21 @@ public class Picture {
   private String id;
   private HashMap<String, Object> data;
   private HashMap<String, Double> scalar;
-  private HashMap<String, Object> metadata;
+  private ProcessInfo processInfo;
 
   @JsonIgnore
   private Mat imageMat;
   private String name;
-  private OperationType operationType;
 
   {
     data = new HashMap<>();
     scalar = new HashMap<>();
-    metadata = new HashMap<>();
-    imageMat=name!=null? FileUtils.readFile(name):null;
+    loadImage();
+
+  }
+
+  public void loadImage() {
+    imageMat = name != null ? FileUtils.readFile(name) : null;
   }
 
 }

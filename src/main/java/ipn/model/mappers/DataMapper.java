@@ -1,8 +1,6 @@
 package ipn.model.mappers;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

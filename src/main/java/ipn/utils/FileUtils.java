@@ -3,6 +3,8 @@ package ipn.utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import javax.imageio.stream.FileImageInputStream;
+import javax.imageio.stream.ImageInputStream;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
 import org.opencv.core.Mat;
@@ -27,8 +29,10 @@ public class FileUtils {
 
   public static byte[] readBytes(String path) {
     File file = new File(path);
-    try (FileInputStream fs = new FileInputStream(file)) {
-      return IOUtils.toByteArray(fs);
+    try (ImageInputStream fs = new FileImageInputStream(file)) {
+      byte[] bytes = new byte[(int) fs.length()];
+      fs.read(bytes);
+      return bytes;//IOUtils.toByteArray(fs);
     } catch (IOException e) {
       log.error("Error with fetching picture from file system", e);
     }

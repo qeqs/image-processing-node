@@ -1,10 +1,11 @@
 package ipn.model.mappers;
 
-import ipn.model.Picture;
+import ipn.model.transport.Picture;
 import ipn.model.PictureEntity;
 import java.util.List;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 /**
@@ -13,9 +14,12 @@ import org.mapstruct.factory.Mappers;
 @Mapper
 public interface EntityMapper {
 
-  static EntityMapper MAPPER = Mappers.getMapper(EntityMapper.class);
+  EntityMapper MAPPER = Mappers.getMapper(EntityMapper.class);
 
-  @Mapping(target = "imageMat", expression = "java(pictureEntity.getName()!=null? FileUtils.readFile(name):null)")
+  @Mappings({
+      @Mapping(target = "imageMat", expression = "java(pictureEntity.getName()!=null?ipn.utils.FileUtils.readFile(pictureEntity.getName()):null)"),
+      @Mapping(target = "processInfo", expression = "java(new ipn.model.transport.ProcessInfo(pictureEntity.getOperationType() ,java.util.UUID.randomUUID().toString(), pictureEntity.getMetadata()))")
+  })
   Picture toTransport(PictureEntity pictureEntity);
 
   PictureEntity toEntity(Picture picture);

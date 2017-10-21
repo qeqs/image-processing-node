@@ -1,6 +1,6 @@
 package ipn.services;
 
-import ipn.model.Picture;
+import ipn.model.transport.Picture;
 import ipn.model.transport.ProcessInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

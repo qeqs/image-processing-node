@@ -1,7 +1,6 @@
 package ipn.model.repositories;
 
 import ipn.model.OperationType;
-import ipn.model.Picture;
 import ipn.model.PictureEntity;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

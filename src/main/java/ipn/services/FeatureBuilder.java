@@ -1,7 +1,7 @@
 package ipn.services;
 
 import ipn.executors.Executor;
-import ipn.model.Picture;
+import ipn.model.transport.Picture;
 import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class FeatureBuilder {
   public Picture buildFeature(Picture picture) {
 
     executors.stream()
-        .filter(executor -> executor.isApplicableFor(picture.getOperationType()))
+        .filter(executor -> executor.isApplicableFor(picture.getProcessInfo().getType()))
         .collect(Collectors.toList())
         .forEach(executor -> executor.process(picture));
     return picture;
