@@ -25,8 +25,8 @@ public class PictureHandler {
   }
 
 
-  public Picture handle(MultipartFile file){
-    Picture picture = preprocessingService.preprocess(file);
+  public Picture handlePicture(MultipartFile file, String filename){
+    Picture picture = preprocessingService.preprocess(file, filename);
     return service.save(picture);
   }
 

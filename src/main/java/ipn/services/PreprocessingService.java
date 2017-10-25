@@ -5,6 +5,7 @@ import ipn.utils.FileUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
 import org.opencv.core.Mat;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 public class PreprocessingService {
 
-  public Picture preprocess(MultipartFile picture) {
+  public Picture preprocess(MultipartFile picture, String filename) {
 
-    File file = new File(picture.getName());
+    File file = new File(filename);
     try (FileOutputStream fs = new FileOutputStream(file)) {
       fs.write(picture.getBytes());
     } catch (IOException e) {
@@ -27,7 +28,7 @@ public class PreprocessingService {
     }
     Mat pic = FileUtils.readFile(file.getAbsolutePath());
     Picture pictureTO = new Picture();
-    pictureTO.setName(picture.getName());
+    pictureTO.setName(filename);
     pictureTO.setImageMat(pic);
     return pictureTO;
   }
