@@ -31,7 +31,10 @@ public class PictureHandler {
   }
 
   public Picture handleProcess(ProcessInfo processInfo, String pictureId){
-    return null;
+    Picture picture = service.getPicture(pictureId);
+    picture.setProcessInfo(processInfo);
+    picture = featureBuilder.buildFeature(picture);
+    return service.save(picture);
   }
 
 }

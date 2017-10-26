@@ -1,5 +1,6 @@
 package ipn.operations.statistics;
 
+import ipn.model.transport.PrimitiveInfo;
 import ipn.operations.OperationsUtil;
 import ipn.operations.base.Operation;
 import java.util.HashMap;
@@ -25,17 +26,25 @@ public abstract class DeviationOperation implements StatisticOperation {
   public HashMap<Integer, Double> execute(Mat image, Map<String, Object> metadata) {
 
     int steps = (int) metadata.get("steps");
+    Integer height = (Integer) metadata.get("primitive_height");
+    Integer width = (Integer) metadata.get("primitive_width");
+    Integer type = (Integer) metadata.get("primitive_type");
 
     HashMap<Integer, Double> chart = mathWaitOperation.execute(image, metadata);
     double mat = OperationsUtil.scalar(chart);
-    chart = new HashMap<>();
+    chart.clear();
 
     Mat res = new Mat();
     Mat tempPrev = new Mat();
     image.copyTo(tempPrev);
     Mat tempNext;
     for (int i = 1; i < 2 * steps; i += 2) {
-      tempNext = morphOperation.execute(tempPrev, metadata);
+
+      PrimitiveInfo primitiveInfo = new PrimitiveInfo(height, width, type);
+      primitiveInfo.increment(i / 2);
+      Map<String, Object> morphMetadata = new HashMap<>();
+      morphMetadata.put("primitive_info", primitiveInfo);
+      tempNext = morphOperation.execute(tempPrev, morphMetadata);
 
       Core.subtract(tempPrev, tempNext, res);
 

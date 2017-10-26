@@ -1,5 +1,6 @@
 package ipn.operations.base.morph;
 
+import ipn.model.transport.PrimitiveInfo;
 import ipn.operations.OperationsUtil;
 import ipn.operations.base.Operation;
 import java.util.Map;
@@ -17,10 +18,8 @@ public class OpeninigOperation implements Operation<Mat> {
 
   @Override
   public Mat execute(Mat image, Map<String, Object> metadata) {
-    Integer type = (Integer) metadata.get("primitive_type");
-    Integer height = (Integer) metadata.get("primitive_height");
-    Integer width = (Integer) metadata.get("primitive_width");
-    return execute(image, OperationsUtil.getStructElement(width, height, type));
+    PrimitiveInfo primitiveInfo = (PrimitiveInfo) metadata.get("primitive_info");
+    return execute(image, OperationsUtil.getStructElement(primitiveInfo));
   }
 
   public Mat execute(Mat img, Mat prim) {

@@ -19,7 +19,7 @@ public interface EntityMapper {
   @Mappings({
       @Mapping(target = "imageMat", expression = "java(pictureEntity.getName()!=null?ipn.utils.FileUtils.readFile(pictureEntity.getName()):null)"),
       @Mapping(target = "processInfo",
-          expression = "java(pictureEntity.getOperationType()!=null?new ipn.model.transport.ProcessInfo(pictureEntity.getOperationType() ,java.util.UUID.randomUUID().toString(), pictureEntity.getMetadata()):null)")
+          expression = "java(pictureEntity.getOperationType()!=null?new ipn.model.transport.ProcessInfo(pictureEntity.getOperationType(), pictureEntity.getMetadata()):null)")
   })
   Picture toTransport(PictureEntity pictureEntity);
 

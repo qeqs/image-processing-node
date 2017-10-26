@@ -58,7 +58,7 @@ public class PictureController {
   }
 
   @PostMapping
-  public ResponseEntity<Picture> loadPicture(@RequestParam("file") MultipartFile image, @RequestParam("filename") String filename) {
+  public ResponseEntity<Picture> loadPicture(@RequestParam("image") MultipartFile image, @RequestParam("filename") String filename) {
     log.info("POST load picture = {}", filename);
     Picture picture = handler.handlePicture(image, filename);
     return new ResponseEntity<>(picture, HttpStatus.ACCEPTED);

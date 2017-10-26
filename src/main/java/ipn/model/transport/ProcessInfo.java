@@ -19,7 +19,6 @@ import lombok.Setter;
 public class ProcessInfo {
 
   private OperationType type;
-  private String id;
   private HashMap<String, Object> metadata;
 
 }
