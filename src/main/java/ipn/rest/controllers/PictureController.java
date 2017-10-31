@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -57,8 +58,8 @@ public class PictureController {
     return new ResponseEntity<>(FileUtils.readBytes(picture.getName()), HttpStatus.OK);
   }
 
-  @PostMapping
-  public ResponseEntity<Picture> loadPicture(@RequestParam("image") MultipartFile image, @RequestParam("filename") String filename) {
+  @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public @ResponseBody ResponseEntity<Picture> loadPicture(@RequestParam("image") MultipartFile image, @RequestParam("filename") String filename) {
     log.info("POST load picture = {}", filename);
     Picture picture = handler.handlePicture(image, filename);
     return new ResponseEntity<>(picture, HttpStatus.ACCEPTED);

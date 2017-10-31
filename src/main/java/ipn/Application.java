@@ -6,7 +6,10 @@ import java.util.Date;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.multipart.support.MultipartFilter;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
@@ -41,6 +44,22 @@ public class Application {
         Collections.emptyList()
     );
   }
+//
+//  @Bean
+//  public CommonsMultipartResolver multipartResolver() {
+//    CommonsMultipartResolver multipart = new CommonsMultipartResolver();
+//    multipart.setMaxUploadSize(3 * 1024 * 1024);
+//    return multipart;
+//  }
+//
+//  @Bean
+//  @Order(0)
+//  public MultipartFilter multipartFilter() {
+//    MultipartFilter multipartFilter = new MultipartFilter();
+//    multipartFilter.setMultipartResolverBeanName("multipartReso‌‌​​lver");
+//    return multipartFilter;
+//  }
+
 
   public static void main(String[] args) {
     nu.pattern.OpenCV.loadShared();
