@@ -1,7 +1,7 @@
 package ipn.executors;
 
 import ipn.model.OperationType;
-import ipn.model.Picture;
+import ipn.model.transport.Picture;
 
 /**
  * Created by Vadim Lygin on 9/28/2017.

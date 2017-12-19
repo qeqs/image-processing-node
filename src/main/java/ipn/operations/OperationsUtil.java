@@ -1,5 +1,6 @@
 package ipn.operations;
 
+import ipn.model.transport.PrimitiveInfo;
 import java.util.HashMap;
 import java.util.Map;
 import org.opencv.core.Mat;
@@ -10,6 +11,9 @@ import org.opencv.imgproc.Imgproc;
  * Created by Vadim Lygin on 9/26/2017.
  */
 public class OperationsUtil {
+  private static final int WIDTH = 5;
+  private static final int HEIGHT = 5;
+  private static final int TYPE = Imgproc.MORPH_RECT;
 
 
   public static Mat getBinaryMat(Mat img) {
@@ -18,8 +22,8 @@ public class OperationsUtil {
     return dst;
   }
 
-  public static Mat getStructElement(int w, int h, int type) {
-    return Imgproc.getStructuringElement(type, new Size(w, h));
+  public static Mat getStructElement(PrimitiveInfo primitiveInfo) {
+    return Imgproc.getStructuringElement(primitiveInfo.getType(), new Size(primitiveInfo.getWidth(), primitiveInfo.getHeight()));
   }
 
   public static double scalar(HashMap<Integer, Double> chart) {

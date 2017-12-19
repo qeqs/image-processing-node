@@ -18,4 +18,9 @@ public class OpeningMathExpectationOperation extends MathExpectationOperation {
       @Qualifier("openinigOperation") Operation morphOperation) {
     super(morphOperation);
   }
+
+  @Override
+  public String toString() {
+    return "OpeningMathExpectation";
+  }
 }

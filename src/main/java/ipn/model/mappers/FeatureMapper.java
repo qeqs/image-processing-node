@@ -3,7 +3,7 @@ package ipn.model.mappers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvMapper;
 import com.fasterxml.jackson.dataformat.csv.CsvSchema;
-import ipn.model.Picture;
+import ipn.model.transport.Picture;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public abstract class FeatureMapper {
     String filename = picture.getName() + ".csv";
     try (Writer writer = new FileWriter(filename)) {
       List<HashMap<String, Double>> listOfMap = picture.getData().entrySet().stream()
-          .map(e -> DataMapper.MAPPER.toStringKey(e.getValue())).collect(
+          .map(e -> DataMapper.MAPPER.toStringKey((HashMap<Integer, Double>) e.getValue())).collect(
               Collectors.toList());
 
       csvWriter(listOfMap, writer);
