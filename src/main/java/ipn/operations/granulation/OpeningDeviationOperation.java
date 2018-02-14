@@ -1,4 +1,4 @@
-package ipn.operations.statistics;
+package ipn.operations.granulation;
 
 import ipn.operations.base.Operation;
 import java.util.HashMap;

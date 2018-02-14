@@ -1,4 +1,4 @@
-package ipn.operations.statistics;
+package ipn.operations.granulation;
 
 import ipn.operations.base.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +11,16 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @Scope("prototype")
-public class OpeningMathExpectationOperation extends MathExpectationOperation {
+public class GradientMathExpectationOperation extends MathExpectationOperation {
 
   @Autowired
-  public OpeningMathExpectationOperation(
-      @Qualifier("openinigOperation") Operation morphOperation) {
+  protected GradientMathExpectationOperation(
+      @Qualifier("gradientOperation") Operation morphOperation) {
     super(morphOperation);
   }
 
   @Override
   public String toString() {
-    return "OpeningMathExpectation";
+    return "GradientMathExpectation";
   }
 }
