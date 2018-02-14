@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import lombok.extern.slf4j.Slf4j;
 import org.opencv.core.Mat;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class PreprocessingService {
 
   public Picture preprocess(MultipartFile picture, String filename) {
+
+    //CompletableFuture.completedFuture(picture.getInputStream()).;
 
     File file = new File(filename);
     try (FileOutputStream fs = new FileOutputStream(file)) {

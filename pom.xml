@@ -24,6 +24,17 @@
     <apache.httpcomponents.version>4.4.5</apache.httpcomponents.version>
     <org.mapstruct.version>1.2.0.Beta3</org.mapstruct.version>
     <hibernate.version>5.2.9.Final</hibernate.version>
+    <nd4j.backend>nd4j-native-platform</nd4j.backend>
+    <nd4j.version>0.9.1</nd4j.version>
+    <dl4j.version>0.9.1</dl4j.version>
+    <datavec.version>0.9.1</datavec.version>
+
+    <!-- For Spark examples: change the _1 to _2 to switch between Spark 1 and Spark 2 -->
+    <dl4j.spark.version>0.9.1_spark_1</dl4j.spark.version>
+    <datavec.spark.version>0.9.1_spark_1</datavec.spark.version>
+
+    <!-- Scala binary version: DL4J's Spark and UI functionality are released with both Scala 2.10 and 2.11 support -->
+    <scala.binary.version>2.11</scala.binary.version>
   </properties>
 
   <dependencies>
@@ -31,6 +42,27 @@
       <groupId>org.openpnp</groupId>
       <artifactId>opencv</artifactId>
       <version>3.2.0-1</version>
+    </dependency>
+
+
+    <!-- deeplearning4j -->
+    <dependency>
+      <groupId>org.datavec</groupId>
+      <artifactId>datavec-api</artifactId>
+      <version>${datavec.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.datavec</groupId>
+      <artifactId>datavec-spark_${scala.binary.version}</artifactId>
+      <version>${datavec.spark.version}</version>
+    </dependency>
+
+    <!-- ND4J backend. You need one in every DL4J project. Normally define artifactId as either "nd4j-native-platform" or "nd4j-cuda-7.5-platform" -->
+    <dependency>
+      <groupId>org.nd4j</groupId>
+      <artifactId>${nd4j.backend}</artifactId>
+      <version>${nd4j.version}</version>
     </dependency>
 
     <dependency>
