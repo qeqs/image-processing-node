@@ -8,33 +8,9 @@ logging:
     org.springframework.web: DEBUG
     org.hibernate: ERROR
 
-
-application:
-  steps: 40
-
 spring:
   application:
     name: "image-processing-node"
-  datasource:
-    url: jdbc:postgresql://localhost:5432/image_processing_node
-    username: postgres
-    password: postgres
-  jpa:
-    hibernate:
-      ddl-auto: update
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    properties:
-      hibernate:
-        show-sql: false
-        format-sql: true
-        use_sql_comments: true
-        generate_statistics: false
-        jdbc:
-          time_zone: "Europe/Moscow"
-      org:
-        hibernate:
-          envers:
-            track_entities_changed_in_revision: true
   autoconfigure:
         exclude:
         #spring boot:

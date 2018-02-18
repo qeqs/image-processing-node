@@ -26,7 +26,7 @@ public class Application {
   public Docket swaggerSettings() {
     return new Docket(DocumentationType.SWAGGER_2)
         .select()
-        .apis(RequestHandlerSelectors.basePackage("ipn.rest.controllers"))
+        .apis(RequestHandlerSelectors.basePackage("ipn.controllers"))
         .build()
         .directModelSubstitute(Date.class, Long.class)
         .apiInfo(apiInfo());

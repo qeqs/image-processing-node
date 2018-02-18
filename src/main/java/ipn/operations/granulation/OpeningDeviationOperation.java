@@ -2,6 +2,8 @@ package ipn.operations.granulation;
 
 import ipn.operations.base.Operation;
 import java.util.HashMap;
+import java.util.List;
+
 import org.opencv.core.Mat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,7 +20,7 @@ public class OpeningDeviationOperation extends DeviationOperation {
   @Autowired
   public OpeningDeviationOperation(
       @Qualifier("openinigOperation") Operation<Mat> morphOperation,
-      @Qualifier("openingMathExpectationOperation") Operation<HashMap<Integer, Double>> mathWaitOperation) {
+      @Qualifier("openingMathExpectationOperation") Operation<List<Double>> mathWaitOperation) {
     super(morphOperation, mathWaitOperation);
   }
 

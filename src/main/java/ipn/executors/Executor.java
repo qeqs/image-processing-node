@@ -1,12 +1,15 @@
 package ipn.executors;
 
 import ipn.model.OperationType;
-import ipn.model.transport.Picture;
+import org.opencv.core.Mat;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Vadim Lygin on 9/28/2017.
  */
-public interface Executor {
-  void process(Picture picture);
+public interface Executor<T> {
+  List<T> process(Mat picture, Map<String, Object> metadata);
   boolean isApplicableFor(OperationType type);
 }

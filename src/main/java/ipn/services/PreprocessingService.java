@@ -1,13 +1,19 @@
 package ipn.services;
 
-import ipn.model.transport.Picture;
+import ipn.executors.Executor;
+import ipn.model.OperationType;
+import ipn.model.transport.GranulationData;
 import ipn.utils.FileUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
+
 import lombok.extern.slf4j.Slf4j;
 import org.opencv.core.Mat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,22 +24,47 @@ import org.springframework.web.multipart.MultipartFile;
 @Slf4j
 public class PreprocessingService {
 
-  public Picture preprocess(MultipartFile picture, String filename) {
+    private final List<Executor> executors;
 
-    File file = new File(filename);
-    try (FileOutputStream fs = new FileOutputStream(file)) {
-      fs.write(picture.getBytes());
-    } catch (IOException e) {
-      log.error("Error with saving picture ", e);
+    @Autowired
+    public PreprocessingService(List<Executor> executors) {
+        this.executors = executors;
     }
-    Mat pic = FileUtils.readFile(file.getAbsolutePath());
-    Picture pictureTO = new Picture();
-    pictureTO.setName(filename);
-    pictureTO.setImageMat(pic);
-    return pictureTO;
-  }
 
 
+    public GranulationData preprocess(MultipartFile[] files, Integer step, OperationType type) {
 
+        GranulationData data = new GranulationData();
+        List<List<Double>> dataList = new ArrayList<>();
+
+        for (MultipartFile image : Arrays.asList(files)) {
+            List<Double> dataPart = preprocess(image, step, type);
+            dataList.add(dataPart);
+        }
+        return data;
+    }
+
+    public List<Double> preprocess(MultipartFile image, Integer step, OperationType type) {
+        List<Double> dataList = new ArrayList<>();
+        File file = new File("temp.png");
+        if (file.exists()) {
+            file.delete();
+        }
+        try (FileOutputStream fs = new FileOutputStream(file)) {
+            fs.write(image.getBytes());
+        } catch (IOException e) {
+            log.error("Error with saving picture ", e);
+        }
+
+        executors.stream()
+                .filter(executor -> executor.isApplicableFor(type))
+                .collect(Collectors.toList())
+                .forEach(executor -> {
+                    List<List<Double>> list = executor.process(FileUtils.readFile(file.getAbsolutePath()),
+                            Collections.singletonMap("steps", step));
+                    list.forEach(item -> dataList.addAll(item));
+                });
+        return dataList;
+    }
 
 }

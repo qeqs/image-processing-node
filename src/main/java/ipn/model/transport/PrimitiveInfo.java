@@ -21,6 +21,10 @@ public class PrimitiveInfo {
   private Integer width;
   private Integer type;
 
+  public PrimitiveInfo(){
+    this(HEIGHT, WIDTH, TYPE);
+  }
+
   public PrimitiveInfo(Integer height, Integer width, Integer type){
     this.type = type;
     this.height = height;

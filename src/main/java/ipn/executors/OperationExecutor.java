@@ -1,29 +1,31 @@
 package ipn.executors;
 
-import ipn.model.transport.Picture;
 import ipn.operations.base.Operation;
-import java.util.HashMap;
+import org.opencv.core.Mat;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Vadim Lygin on 9/28/2017.
  */
-public abstract class OperationExecutor implements Executor {
+public abstract class OperationExecutor<T> implements Executor<T> {
 
 
   protected final List<? extends Operation> operations;
 
-  protected OperationExecutor(List<? extends Operation> operations) {
+  protected OperationExecutor(List<? extends Operation<T>> operations) {
     this.operations = operations;
   }
 
 
-  public void process(Picture picture) {
-    HashMap<String, Object> featureList = new HashMap<>();
-    for (Operation operation : operations) {
-      featureList.put(operation.toString(), operation.execute(picture.getImageMat(), picture.getProcessInfo().getMetadata()));
+  public List<T> process(Mat picture, Map<String, Object> metadata) {
+    List<T> featureList = new ArrayList<>();
+    for (Operation<T> operation : operations) {
+      featureList.add(operation.execute(picture, metadata));
     }
-    picture.setData(featureList);
+    return featureList;
   }
 
 }

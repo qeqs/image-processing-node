@@ -2,7 +2,10 @@ package ipn.operations.granulation;
 
 import ipn.model.transport.PrimitiveInfo;
 import ipn.operations.base.Operation;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
@@ -19,20 +22,20 @@ public abstract class MathExpectationOperation implements GranulationOperation {
   }
 
   @Override
-  public HashMap<Integer, Double> execute(Mat image, Map<String, Object> metadata) {
+  public List<Double> execute(Mat image, Map<String, Object> metadata) {
 
     int steps = (int) metadata.get("steps");
-    Integer height = (Integer) metadata.get("primitive_height");
-    Integer width = (Integer) metadata.get("primitive_width");
-    Integer type = (Integer) metadata.get("primitive_type");
+//    Integer height = (Integer) metadata.get("primitive_height");
+//    Integer width = (Integer) metadata.get("primitive_width");
+//    Integer type = (Integer) metadata.get("primitive_type");
 
-    HashMap<Integer, Double> chart = new HashMap<>();
+    List<Double> chart = new ArrayList<>();
     Mat res = new Mat();
     Mat tempPrev = new Mat();
     image.copyTo(tempPrev);
     Mat tempNext;
     for (int i = 1; i < 2 * steps; i += 2) {
-      PrimitiveInfo primitiveInfo = new PrimitiveInfo(height, width, type);
+      PrimitiveInfo primitiveInfo = new PrimitiveInfo();
       primitiveInfo.increment(i / 2);
 
       Map<String, Object> morphMetadata = new HashMap<>();
@@ -41,7 +44,7 @@ public abstract class MathExpectationOperation implements GranulationOperation {
       tempNext = (Mat) morphOperation.execute(tempPrev, morphMetadata);
 
       Core.subtract(tempPrev, tempNext, res);
-      chart.put(i, Core.norm(res) / (res.height() * res.width()));
+      chart.add(Core.norm(res) / (res.height() * res.width()));
 
       tempNext.copyTo(tempPrev);
     }

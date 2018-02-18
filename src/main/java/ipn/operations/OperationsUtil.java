@@ -2,6 +2,7 @@ package ipn.operations;
 
 import ipn.model.transport.PrimitiveInfo;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.opencv.core.Mat;
 import org.opencv.core.Size;
@@ -26,10 +27,9 @@ public class OperationsUtil {
     return Imgproc.getStructuringElement(primitiveInfo.getType(), new Size(primitiveInfo.getWidth(), primitiveInfo.getHeight()));
   }
 
-  public static double scalar(HashMap<Integer, Double> chart) {
+  public static double scalar(List<Double> chart) {
     double mat = 0.0;
-    for (Map.Entry<Integer, Double> entry : chart.entrySet()) {
-      Double value = entry.getValue();
+    for (Double value : chart) {
       mat += value;
     }
     return mat;
