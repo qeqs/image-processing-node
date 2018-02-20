@@ -36,8 +36,10 @@ public class Controller {
 
   @RequestMapping(value = "/preprocessing/granulation", method = RequestMethod.POST)
   public ResponseEntity<GranulationData> process(
-      @RequestParam("uploadingFiles") MultipartFile[] uploadingFile,
-      @RequestParam("steps") String steps) throws IOException {
+      @RequestPart("uploadingFiles") MultipartFile[] uploadingFile,
+      @RequestPart("steps") String steps,
+      HttpServletResponse response) throws IOException {
+    log.info("Received response: {}" ,response);
 
     return new ResponseEntity<>(
         preprocessingService
@@ -47,8 +49,8 @@ public class Controller {
 
   @RequestMapping(value = "/preprocessing/granulation/single", method = RequestMethod.POST)
   public ResponseEntity<GranulationData> processSingle(
-      @RequestPart(value = "uploadingFile", required = false) MultipartFile uploadingFile,
-      @RequestPart(value = "steps", required = false) String steps,
+      @RequestPart(value = "uploadingFile") MultipartFile uploadingFile,
+      @RequestPart(value = "steps") String steps,
       HttpServletResponse response) throws IOException {
     log.info("Received response: {}" ,response);
     GranulationData data = new GranulationData();
