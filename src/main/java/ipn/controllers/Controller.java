@@ -7,8 +7,11 @@ import static org.springframework.http.MediaType.TEXT_PLAIN_VALUE;
 
 import io.swagger.annotations.Api;
 import ipn.model.OperationType;
+import ipn.model.transport.FileTO;
 import ipn.model.transport.GranulationData;
+import ipn.model.transport.RootTO;
 import ipn.services.PreprocessingService;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +60,18 @@ public class Controller {
     data.setData(Collections.singletonList(
         preprocessingService.preprocess(uploadingFile, Integer.valueOf(steps), OperationType.GRANULATION)));
     return new ResponseEntity<>(data, HttpStatus.OK);
+  }
+
+  @RequestMapping(value = "/preprocessing/granulation/fileto", method = RequestMethod.POST)
+  public ResponseEntity<GranulationData> processDto(
+      @RequestParam("uploadingFiles") RootTO uploadingFile) throws IOException {
+    FileTO files = uploadingFile.getFileTO();
+    MultipartFile[] data = new MultipartFile[files.getFiles().size()];
+    files.getFiles().toArray(data);
+    return new ResponseEntity<>(
+        preprocessingService
+            .preprocess(data, files.getSteps(), OperationType.GRANULATION),
+        HttpStatus.OK);
   }
 
 }
