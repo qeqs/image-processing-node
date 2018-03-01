@@ -3,6 +3,7 @@ package ipn.services;
 import ipn.executors.Executor;
 import ipn.model.OperationType;
 import ipn.model.transport.GranulationData;
+import ipn.operations.base.morph.MedianFilterOperation;
 import ipn.utils.FileUtils;
 
 import java.io.File;
@@ -25,6 +26,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class PreprocessingService {
 
     private final List<Executor> executors;
+    @Autowired
+    private MedianFilterOperation filter;
 
     @Autowired
     public PreprocessingService(List<Executor> executors) {
@@ -60,7 +63,9 @@ public class PreprocessingService {
                 .filter(executor -> executor.isApplicableFor(type))
                 .collect(Collectors.toList())
                 .forEach(executor -> {
-                    List<List<Double>> list = executor.process(FileUtils.readFile(file.getAbsolutePath()),
+                    Mat img = filter.execute(FileUtils.readFile(file.getAbsolutePath()),null);
+
+                    List<List<Double>> list = executor.process(img,
                             Collections.singletonMap("steps", step));
                     list.forEach(item -> dataList.addAll(item));
                 });

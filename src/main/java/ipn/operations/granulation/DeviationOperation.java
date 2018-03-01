@@ -39,10 +39,10 @@ public abstract class DeviationOperation implements GranulationOperation {
     Mat tempPrev = new Mat();
     image.copyTo(tempPrev);
     Mat tempNext;
-    for (int i = 1; i < 2 * steps; i += 2) {
+    for (int i = 3; i < 2 * steps + 2; i += 2) {
 
       PrimitiveInfo primitiveInfo = new PrimitiveInfo();
-      primitiveInfo.increment(i / 2);
+      primitiveInfo.increment(i);
       Map<String, Object> morphMetadata = new HashMap<>();
       morphMetadata.put("primitive_info", primitiveInfo);
       tempNext = morphOperation.execute(tempPrev, morphMetadata);

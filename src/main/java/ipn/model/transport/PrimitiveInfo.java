@@ -13,8 +13,8 @@ import org.opencv.imgproc.Imgproc;
 @Getter
 @Setter
 public class PrimitiveInfo {
-  private static final int WIDTH = 5;
-  private static final int HEIGHT = 5;
+  private static final int WIDTH = 2;
+  private static final int HEIGHT = 2;
   private static final int TYPE = Imgproc.MORPH_RECT;
 
   private Integer height;
